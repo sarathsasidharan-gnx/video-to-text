@@ -53,6 +53,13 @@ THREADS = max(1, (os.cpu_count() or 4) - 1)
 HERE = Path(__file__).resolve().parent
 INPUT_DIR = HERE / "input"
 OUTPUT_DIR = HERE / "output"
+MODELS_DIR = HERE / "models"
+
+# Keep downloaded models inside the project instead of the user profile, so an
+# offline machine can be handed a models\ folder and never reach the internet.
+# Set HF_HOME / TORCH_HOME yourself beforehand to override this.
+os.environ.setdefault("HF_HOME", str(MODELS_DIR / "huggingface"))
+os.environ.setdefault("TORCH_HOME", str(MODELS_DIR / "torch"))
 
 MEDIA_EXTS = {
     ".mp4", ".mkv", ".mov", ".avi", ".webm", ".flv", ".wmv", ".m4v",
@@ -206,6 +213,7 @@ def main():
 
     INPUT_DIR.mkdir(exist_ok=True)
     OUTPUT_DIR.mkdir(exist_ok=True)
+    MODELS_DIR.mkdir(exist_ok=True)
 
     found = sorted(f for f in INPUT_DIR.iterdir()
                    if f.is_file() and f.suffix.lower() in MEDIA_EXTS)

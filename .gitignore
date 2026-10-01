@@ -1,4 +1,4 @@
-# Virtual environment (~4 GB, rebuilt by setup.bat)
+# Virtual environment (~4 GB, rebuilt by setup.bat / install_offline.bat)
 .venv/
 
 # Local scratch - may hold real recordings. Never commit.
@@ -9,6 +9,11 @@ input/*
 output/*
 !input/.gitkeep
 !output/.gitkeep
+
+# Offline bundle contents - far too big for a repo.
+# These are published as GitHub Release assets instead, see README.
+wheels/
+models/
 
 # Python
 __pycache__/

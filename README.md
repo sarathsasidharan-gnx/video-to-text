@@ -57,6 +57,35 @@ a 1-hour recording takes ~35 min.
 `setup.bat` does the rest. Run it on its own to install ahead of time or to
 repair the environment.
 
+## Offline / air-gapped install
+
+For a machine that cannot reach PyPI or Hugging Face, use the **offline bundle**
+on the [Releases page](https://github.com/sarathsasidharan-gnx/video-to-text/releases).
+
+On the target machine you need only **Python 3.13** installed (any patch
+version — 3.13.0, 3.13.7, whatever) plus ffmpeg on PATH.
+
+1. Clone or download this repo.
+2. From the latest Release, download and extract **next to `app.py`**:
+   - `wheels.zip`  → gives you `wheels\` (every package, no download needed)
+   - `models.zip`  → gives you `models\` (Whisper + alignment models)
+3. Run **`install_offline.bat`**.
+4. Put files in `input\`, run `Transcribe.bat`.
+
+`install_offline.bat` passes `--no-index` to pip, so it physically cannot reach
+the network — if it succeeds, the install is genuinely self-contained.
+
+Models are read from `models\` in the project folder (the app sets `HF_HOME`
+and `TORCH_HOME` there), so nothing is fetched at run time either.
+
+### Why not commit the venv?
+
+A virtual environment is not portable: it contains no Python of its own, bakes
+absolute paths into `pyvenv.cfg` and 43 script shims, and holds files up to
+2.2 GB that GitHub refuses outright (100 MB hard limit). Shipping wheels and
+rebuilding on the target is both smaller and version-safe — the wheels are
+`cp313`, and CPython keeps a stable ABI across all 3.13.x releases.
+
 ## Speaker labels (optional)
 
 Transcription works without this, but **everything lands in one unbroken block**
