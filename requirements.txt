@@ -1,0 +1,12 @@
+# Installed into .venv by setup.bat.
+# whisperx pulls in faster-whisper, pyannote-audio, transformers and the rest.
+#
+# Do NOT add --extra-index-url https://download.pytorch.org/whl/cpu here.
+# On Windows the plain PyPI torch wheel is already the CPU build, and that
+# extra index lets pip pair torch 2.8 with torchaudio 2.11, which installs
+# a broken torch (ImportError: DLL load failed while importing _C).
+# These three are a matched set - bump them together or not at all.
+whisperx>=3.8,<4
+torch==2.8.0
+torchaudio==2.8.0
+torchvision==0.23.0

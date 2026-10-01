@@ -1,0 +1,22 @@
+# Virtual environment (~4 GB, rebuilt by setup.bat)
+.venv/
+
+# Local scratch - may hold real recordings. Never commit.
+tmp/
+
+# Your media and your transcripts stay on your machine.
+input/*
+output/*
+!input/.gitkeep
+!output/.gitkeep
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Editors / OS
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
